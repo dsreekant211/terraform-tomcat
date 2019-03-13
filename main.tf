@@ -5,14 +5,14 @@ provider "aws" {
 
 resource "aws_instance" "webserver1" {
   # count = "${length(var.pub_sub_cidr)}"
-  ami           = "ami-07b7a0b24befd05fa"
-  instance_type = "t2.micro"
-  depends_on = ["aws_internet_gateway.gw"]
-  availability_zone = "${var.az_list[count.index]}"
+  ami                         = "ami-07b7a0b24befd05fa"
+  instance_type               = "t2.micro"
+  depends_on                  = ["aws_internet_gateway.gw"]
+  availability_zone           = "${var.az_list[count.index]}"
   associate_public_ip_address = true
-  vpc_security_group_ids = ["${aws_security_group.sg_webserver1.id}"]
-  key_name = "testing"
-  subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
+  vpc_security_group_ids      = ["${aws_security_group.sg_webserver1.id}"]
+  key_name                    = "testing"
+  subnet_id                   = "${element(aws_subnet.public.*.id, count.index)}"
 
   tags {
     Name = "webserver1"
@@ -22,27 +22,27 @@ resource "aws_security_group" "sg_webserver1" {
   name = "Allow http port"
   vpc_id      = "${aws_vpc.dev.id}"
   ingress {
-    from_port = 80
-    to_port = 80
-    protocol = "tcp"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
  }

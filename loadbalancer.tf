@@ -1,19 +1,19 @@
 
 resource "aws_lb_target_group" "webserver_target" {
-  port     = 8080
-  protocol = "HTTP"
-  vpc_id   = "${aws_vpc.dev.id}"
+  port        = 8080
+  protocol    = "HTTP"
+  vpc_id      = "${aws_vpc.dev.id}"
   target_type = "instance"
 #   path         = "/"
 }
 
 resource "aws_lb" "test" {
-  name               = "test-lb-tf"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups = ["${aws_security_group.sg_webserver1.id}"]
+  name                       = "test-lb-tf"
+  internal                   = false
+  load_balancer_type         = "application"
+  security_groups            = ["${aws_security_group.sg_webserver1.id}"]
   enable_deletion_protection = false
-  subnets = ["${aws_subnet.public.*.id}"]
+  subnets                    = ["${aws_subnet.public.*.id}"]
   #subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
   tags = {
     Environment = "production"

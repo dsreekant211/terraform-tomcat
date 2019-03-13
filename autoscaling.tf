@@ -1,7 +1,7 @@
 resource "aws_launch_configuration" "launch_webserver_ami" {
-  name          = "webserver_as"
-  image_id      = "ami-07b7a0b24befd05fa"
-  instance_type = "t2.micro"
+  name            = "webserver_as"
+  image_id        = "ami-07b7a0b24befd05fa"
+  instance_type   = "t2.micro"
   security_groups = ["${aws_security_group.sg_webserver1.id}"]
 
   lifecycle {
