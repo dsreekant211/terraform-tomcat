@@ -1,8 +1,6 @@
 provider "aws" {
   region     = "us-east-1"
-  access_key = "AKIAIIS36ZRCJHIRAZCA"
-  secret_key = "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"
-}
+ }
 
 resource "aws_instance" "webserver1" {
   # count = "${length(var.pub_sub_cidr)}"
